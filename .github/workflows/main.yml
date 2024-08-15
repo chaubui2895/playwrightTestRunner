@@ -1,0 +1,21 @@
+name: CI Workflow
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - master
+
+# The jobs that will run in the workflow
+jobs:
+  e2e-tests:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+      - uses: mircrosoft/playwright-github-action@v1
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npx playwright test
